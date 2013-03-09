@@ -1,0 +1,35 @@
+
+[[ ---- BEGIN ERROR LOG ---- 03/08/13 - 20:18:24 ---- BEGIN ERROR LOG ---- ]]
+[ 20:18:24 ] CLIENT ERROR: Unable to open config file.
+[ 20:18:24 ] WARNING: Unable to load config, using defaults
+[ 20:18:25 ] CONSYS ERROR: Unable to load console background.
+[ 20:18:25 ] CONSYS ERROR: Unable to load console font.
+[ 20:18:25 ] CONSYS ERROR: Unable to load splash screen.
+[ 20:18:25 ] WARNING: Invalid font format.
+[ 20:18:25 ] ERROR:  Cannot open tracks/demo1.ase for conversion.
+[ 20:18:25 ] Couldn't open tracks/demo1.ase
+[ 20:18:25 ] CLIENT: Unable to Define World Space
+[ 20:18:25 ] CLIENT: Couldn't initialize
+[ 20:18:26 ] SYSTEM ERROR: A fatal error has occured; shutting down.
+
+[[ ---- BEGIN ERROR LOG ---- 03/08/13 - 20:20:52 ---- BEGIN ERROR LOG ---- ]]
+[ 20:20:52 ] CLIENT ERROR: Unable to open config file.
+[ 20:20:52 ] WARNING: Unable to load config, using defaults
+[ 20:20:55 ] CONSYS ERROR: Unable to load console background.
+[ 20:20:55 ] CONSYS ERROR: Unable to load console font.
+[ 20:20:55 ] CONSYS ERROR: Unable to load splash screen.
+[ 20:20:55 ] WARNING: Invalid font format.
+[ 20:20:56 ] ERROR:  Cannot open tracks/demo1.ase for conversion.
+[ 20:20:56 ] Couldn't open tracks/demo1.ase
+[ 20:20:56 ] CLIENT: Unable to Define World Space
+[ 20:21:07 ] ERROR:  Cannot open tracks/demo1.ase for conversion.
+[ 20:21:07 ] Couldn't open tracks/demo1.ase
+[ 20:22:06 ] ERROR:  Cannot open tracks/demo1.ase for conversion.
+
+[[ ---- BEGIN ERROR LOG ---- 03/08/13 - 20:34:04 ---- BEGIN ERROR LOG ---- ]]
+[ 20:34:04 ] CLIENT ERROR: Unable to open config file.
+[ 20:34:04 ] WARNING: Unable to load config, using defaults
+[ 20:34:05 ] CONSYS ERROR: Unable to load console background.
+[ 20:34:05 ] CONSYS ERROR: Unable to load console font.
+[ 20:34:05 ] CONSYS ERROR: Unable to load splash screen.
+[ 20:34:05 ] WARNING: Invalid font format.

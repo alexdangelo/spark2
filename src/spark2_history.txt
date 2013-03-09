@@ -1,0 +1,175 @@
+Jul 05, 2001 Time spent: 1 hour
+*Added sound. Needs lots of tweaking. Right now the sound fades in and out when the ship starts up and gets close to stopping. It also speeds up as the ship moves faster. I'm using FMOD for sound...it's pretty nice. The sound only is played for the player's ship right now (there's a flag that ensures that happens)
+*Starting writing up theory for Spark3 (!) Why? Aren't I sick of this game yet??? Well...yeah...but the rewrite will be much, much better and a joy to work with, plus I should be able to catch up to Spark2 fairly quickly (a couple of weeks, I'd say). I also want to do this so I can show it off to the public and potential employers without any (or much) embarrassment about the source code underneath.
+
+Jun 13, 2001 Time spent: 1 hour
+*Added pseudo collision detection. Really we just limit how far the ship can travel from the center of the track. The ship/game needs to know how wide the track is, and the radius of the ship. Right now it's hardcoded, but the width of the track should be made so users can modify it.
+*I will finish this game.
+
+Mar 17, 2001 Time spent: 9:30pm - 12:00am -- 2.50 hours
+*Worked on collision detection. It's not working right now. Sigh... 
+*I really want to rewrite. Access values via trackPtr->model.modelHead->next->instHead->next->worldpos is ridiculous and very error prone. It took me a while to figure out why I wasn't getting a valid worldpos until I realized I left out some essential nexts in two spots. 
+
+Feb 10, 2001 Time spent: 5:30pm - 6:30pm -- 1.0 hours
+*Started working on collision detection. Right now I'm in the process of doing a line-tri intersection with a line perpendicular to the trackspline that passes through the ship, which should detect which triangle is next to the ship. From this we go on to see if the ship is actually colliding with that triangle and do collision response if necessary. 
+*The code is getting harder and harder to work with. I'd really like to rewrite everything so I have nice interfaces and ways to access and manipulate the game data and general flow of the game, but that's just too much work. I'll get this version working, even though it'll be yucky, but it's a learning process. 
+*As I look back on the code, it looks like CPP code written by a C programmer, which is absolutely true. I have a much better idea of object-oriented design now than I did when writing Spark2. It'd actually be cool to write "Spark3" in Java and use OpenGL, so writing it would be a joy, it'd run anywhere, and my Java skillz would be very marketable. 
+
+Jan 17, 2001 Time spent: 1 hour tracing through statements in the debugger
+*I couldn't figure out why the model that was acting as the track (not actually labeled "track") had the texture incorrectly tiled -- it was tiled like 8 times per face instead of 1 time per face, and changing the tiling values in MAX and directly in the ASE file didn't make a difference.
+*Manually tweaking with the ASE file, I found that changing the ground texture's tiling affected the track texture's tiling, but I couldn't figure out why I was reading the wrong tex tiling vals. 
+*It turns out that when calculating the texcoords in the CTexture class, I was reading from the wrong texture because of the way I access things, such as object->objecthead->next->value, which is just ridiculous. Of course that comes with in-experience and this was really my first semi-object-oriented program, so it's ok.
+*I got email from Michael today, and he asked how we were and what we were up to. That's so good, because I haven't talked with him since Septmeber, and wrote him email in November (with no response, so I don't think he got it). Anyway, that's it.
+
+Dec 15, 2000 Time spent: 3:00pm - 7:00pm -- 4 hours
+*I needed a simple test track with high walls to test collision detection. The map (trackCD.max|demo1.ase) looks good, but the track texture doesn't tile correctly. 
+*If you loft a track, use the material editor to adjust the texture uv coords, instead of using the loft rollout to adjust them. If you use the loft rollout's uv coords, the track, when brought into spark, will cause the game to be really choppy. I think this has to do with the way it generates texcoords > 1.0.
+*Didn't get a chance to write anymore code :( I have to go back home for the weekend, so the next time I'll be able to do stuff is either the end of next week or the week after. 
+
+Dec 14, 2000 Time spent: 10:00pm - 2:00am -- 4 hours
+*Spent the entire afternoon and some of the evening on collision detection theory. Wrote pages of notes, ideas, and solutions. 
+*Implemented the first part of collision detection -- finding out where we are on the track -- a line perpendicular to the trackspline and passing through the ship is calculated and drawn. Soon we'll figure out if we're touching the track walls and we'll act on it. 
+
+Dec 12, 2000 Time spent: 2 hours
+*Ship now rolls/banks/tilts when turning!
+
+Dec 11, 2000 Time spent: 6 hours
+*Added ship physics -- the ship can now accelerate and move "realistically". 
+*Started to use the code Ryan merged, but some of the files were out of date and since Ryan's code mainly added sound, which wasn't working anyway, I decided to continue off my version before the merge. I don't think Ryan's going to do any more work on Spark2 anyway, and since we're not using VSS, that's probably a good thing. 
+*Removed all MathEngine code. I don't really know how to use it effectively and we don't have any money to license it. Besides, it's way more physics code than we need for what this game turned out to be.
+
+Aug 30, 2000 Time spent: 2 hours
+*Finished adding the powerups. They can be specified, placed on the level, and detected by the ship, plus there's a delay before the powerup becomes active again once it has been touched. Once I have more of the ships' game properties done, I'll make the powerups actually take effect.
+
+Aug 29, 2000
+*Moved into N-Anyu's house for 4 days so I can concentrate on programming. It's also a good to spend time with my grandma. I'll be here 'til Friday afternoon. My goals are to finish the powerups (easy) but I need to figure out what to do next, maybe cameras or use the new version of MathEngine.
+*The physics are sometimes broken if a new level is loaded and the game is unpaused.
+
+Aug 16-23, 2000 Time spent: maybe 8 hours
+*Finished implementing the checkpoints, start line, and finish line. I had to modify the lineTriangle collision functions (from Dave Eberly) so it would compute the interesection between the tri and a line with 0 <= t <= 1. 
+*Mostly finished the start positions. The ships are placed correctly, but not oriented with the track. I'll get this working once I figure out the best way to describe the orientation of the ship. 
+*Going to work on powerups. It should be quick and easy -- they're just basically another type of gate, except the region is spherical instead of planar. 
+*Looked into debugging functions, such as _CrtCheckMemory() and _CrtDumpMemoryLeaks(). Found a few leaks, but I'll work more with these when the game is closer to being done.
+
+Aug 15, 2000
+*Michael came over with his computer. We spent most of the day (1:30 - 6:00pm) talking with him, working on his computer, and fixing the bugs. 
+*We found 2 bugs in the parsing code for the image filename. The first one duplicated a letter in the middle of the file name (ie grassdirt -> grasssdirt). The second was that paths with spaces wasn't being handled correctly. Anyway, they're fixed now.
+*I'll be making a special demo version of this program to show off to Tim Brengle tomorrow.
+
+Aug 14, 2000 Time spent: 4:00pm - 10:30pm
+*I'm back at Ryan's house for a few days (Mon - Wed). Brought two 12-packs of Mt. Dew.
+*We merged our code. We've been coding independently for almost two months, but the merge only took a few minutes! How?, you may ask. Well, Ryan hasn't done a lot of work on the game and what work he had done was never checked back into VSS, so my work became the offical merged copy! That's probably the easiest merge I'll ever have. Heck, even the first merge we did with Spark 1 took 4 hours. 
+*Added gate detection to ships. The code compiles but it doesn't work. I don't know why. I even drew the line for the path of the ship of the last and current frame, except there was no line. I'm going to create a new test level with a few *giant* gate zones and hopefully that will work.
+*Talked with Michael for about a half hour over the phone. He's still having problems texturing things. We even went step-by-step over the phone with me telling him how I do it (his way was much cooler, btw), and he still can't get the textures to be displayed. So, he'll come here tomorrow and we'll set his machine up and look at his setup, instead of passing files around and speculating on the problem.
+*Arranged to go to lunch with Tim Brengle! Wed, 11:30am, at his office in Cupertino
+
+Aug 09, 2000 Time spent: 1:30pm - 2:30pm, 3:00pm - 5:00pm, 10:00pm - 12:30am = 5.50 hours
+*Finished added checkpoints and start positions, as well as powerups, since I was at it.
+*Temporarily, the gates, checkpoints, and powerups are displayed.
+*Time to start working on an interface between the ship and the track so we can detect gates and powerups.
+
+Aug 08, 2000 Time spent: 8:00pm - 11:00pm, 11:30pm - 1:00am == 4.50 hours
+*Made a lot of changes! Created a cpp file for CTrack and moved a bunch of stuff out of CScene into it. 
+*I can load up checkpoints. I still have a lot of work to do to make them useful. Adding checkpoints is a much more complex (but not difficult) task than I expected.
+*The past few days I tried to get the car to be correctly displayed, but it's not working.
+*Used GDPro, a UML modeler, to "reverse engineer" Spark2 to create a diagram. It looks really cool and the code looks clean and the classes are basically independent of each other.
+
+July 28, 2000 Time spent: 12:00am - 2:00am == 2.00 hours
+*Finished conversion of MathEngine car demo from C to C++. Dropping it into Spark went well, but I need to work on displaying and controlling it. For now I'm just drawing a couple of discs as placeholders.
+
+July 27, 2000 Time spent: a few hours (3)
+*Did stuff over the last couple of day, but don't remember what exactly. Also went to the Sonoma County Fair. 
+
+July 24, 2000 Time spent: 4:00pm - 6:30pm == 2.50 hours
+*The MathEngine representation of the ship now moves back and forth, but the camera isn't attached to it yet.
+*Looking into how to make the ship accelerate and turn so it feels good and looks right.
+
+July 23, 2000 Time spent: 4:00pm - 6:00pm, 9:30pm - 1:30am == 6.0 hours
+*Implemented the ship's physics. Still needs work, but it's going very well so far! I still need to write the input code for the ship, since the current code just moves the model around instead of applying forces to the physical model.
+*I would just like to say that the MathEngine documentation isn't very complete or thorough. However, the example programs they include are great!
+
+July 22, 2000 Time spent: 1 hour
+*Did a little more stuff
+
+July 21, 2000
+*Had a meeting with Ryan and Michael. No one has really done anything for the game. We'll meet again in 2 weeks.
+
+July 20, 2000 Time spent: 12:00am - 1:30am == 1.5 hours
+*Working on getting the ship to follow the track. Not working yet.
+
+July 19, 2000 Time spent: a little off and on during the day, 12:00am - 2:00am == 2.0 hours
+*Implementing AI for the ships! Added CAi.cpp/h. Soon I'll have them follow the track.
+*Suffering from a major lack of enthusiasm, motivation, and frustration for Spark.
+
+June 16, 2000 Time spent: a few minutes
+*Gave today's build to Michael so he could play and test his models in it.
+*Added ability to move the ship up and down (temporarily)
+*Wrote up documentation for creating art
+*Uploaded all the E3 pics.
+*Last day at Ryan's. Moved all my computer stuff (Monitor, computer, 3 boxes - 2 of books, 1 of cables and stuff) to Dad's house. I left around 8:30pm.
+
+June 14, 2000 Time spent: 2:00pm - 6:00pm == 4.0 hours
+*Fixed tex coords! The textures are now displayed correctly, instead of upside-down and backwards. And, as a by-product, UV mapping (done by hand) works too! The fix was to change x,y = u,v to x,y = u, 1-v. The textures had been drawn incorrectly since the beginning of spark 1 (!).
+*Created a bunch of test models in 3dStudio to make sure all the texturing works.
+
+June 13, 2000 Time spent: 1:00pm - 3:30pm, 3:30pm - 6:30pm, 8:30pm - 1:30am (off and on) == ~8.0 hours
+*Had a good conversation with Ryan over coding style, being immersed in gaming news vs the general public, and showing off our knowledge at computer games stores (like Electronics Botique and Babbage's).
+*Ryan made a *cool* test track (with the yellow chevron texture for the ground and metal strip borders) that looked so good, it was like looking at a different (and more complete) game! He's working on some more test tracks so we can take screenshots, do texture code debugging, and so we can have some levels that aren't "programmer art". 
+*Ships can now be loaded from the console -- ship shipname[.ase]
+*Tracks can now be loaded from the console -- track trackname[.ase] 
+*I need to deal with the ship now, since if a track is loaded, a ship has to be (re)loaded. Right now the ship filename is static and is always loaded with the track.
+
+June 12, 2000 Time spent: 1:30pm - 4:30pm, 8:00pm - 11:00pm Time spent == 6.0 hours
+*Working on loading and unloading the game. Doesn't quite work yet. The main problem was that a lot of the initialization was happening in the constructors, but when I wanted to reload everything, the constructors weren't being called (of course). So, I made init() funcs for everything, which the constructor calls as well. 
+*Merged MathEngine code into the current codebase. Took a few minutes since many of the files hadn't been touched since I started working offline. 
+*Ryan finished up the console over the weekend. He'll be writing up documentation on how to add commands to the console.
+*Went up with Mike to Sonoma over the weekend to help Ryan Panlilio move in to his apartment. 
+
+June 09, 2000 Time spent: 11:30am - 6:30pm Time spent == 7.0 hours
+*Worked offline on adding the cd_ball02 demo to spark. It took a while to get it to work because of a lot of little bugs that I had. However, I also spent a while trying to figure out how to add the headers correctly -- one head could only be included once, otherwise things wouldn't work. It was harder to figure out than it sounds. 
+*Played a little "Serious Sam". It's a *great* game! and it feels like Doom!
+*The ship is now able to shoot a ball, which then bounces and rolls away. 
+*Ryan spent the day re-architecting the console so it can be used everywhere. He did come across a problem where he tried to access class functions via a void pointer. He still can't get that to work correctly; he's waiting on replies from the newsgroups. As soon as he's done with that (and he almost is), he'll start doing the networking code. I'll upload the MathEngine version of Spark as soon as he's done (so I can checkout the files).
+*To do: add physical properties to the ship.
+
+June 06, 2000 Time spent: 2:00pm - 7:30pm Time spent == 5.50 hours
+*I hate working with cameras! The camera code is better, but I'm not using it. Instead, I'm using Spark 1 style camera code (the camera follows directly behind the ship) temporarily. The camera code doesn't matter too much anyway -- it'll be mostly replaced by MathEngine code. 
+*Ryan started rewriting the main window intialization code since he couldn't figure out what was wrong. He also rethought the console and is modifying it so through it we can access and modify all the other classes. 
+*Bought a bag of Hershey's Miniatures.
+
+June 05, 2000 Time spent: 2:30pm - 7:30pm, 8:30pm - 11:00pm, 11:30pm - 12:30am, 12:30am - 2:00am == 10.00 hours
+*Ryan registered radioactivestudios.com (under fiadmin) for Fusion Industries for one year. We liked the name. "It's a new project!" quoth Ryan after registering it. "We do have a thing about long domain names!" again quoth Ryan at 12:21am. We're not sure what we'll use it for. "Maybe Radioactive Studios can be the development company, and Fusion Industries can be the big parent!" said Ryan. "But isn't that what we had with FusionDev?" notes Alex. "Shutuuuppp!" sez Ryan in a humble winey humorous tone. 
+*Worked on the camera some more...
+*Worked on making the camera orbit around a point. It's not working though! The orbit radius from the target keeps growing with each orbit movement! I even tried it with pencil-and-paper and still get the same results! I don't know what I'm doing wrong. So for now, I'm just using glRotate() to simulate an orbit, instead of physically orbiting the camera's position. 
+*Played a little Serious Sam
+*Orbiting in the xz plane almost works now. I actually referred to Spark June 1999 for orbiting rotation code! 
+*Spent the last hour and a half debugging Ryan's code -- the server window comes up fine but the client window doesn't, and the kicker is that they essentially use the same code!
+
+June 02, 2000 Time spent: 1 minute
+*Went to A's vs Giants game with Mike. There were fireworks afterwards. It was very cool!
+
+June 01, 2000 Time spent: 1:00pm - 8:00pm == 7.00 hours
+*Added a camera. It can be made to follow a model, ship, or just move about freely. There's a lot of temp code in place. I should create CCamera::getInput(). Also, the camera won't move in the direction it's facing. 
+
+May 31, 2000 Time spent: 1:00pm - 8:30pm == 7.50 hours
+*Did some more research on MathEngine -- looked at how the demos (cd_chair, bridge, car) were set up. 
+*Worked on CShip so it now loads a model and displays it. It can move around too. Right now the movement code is temporary; I just needed something so I could plug MathEngine into it. 
+*CTexture now reads ambient, diffuse, specular, and transparency values for textures
+*Tried to debug Ryan's client / server code -- the client window isn't created for some strange reason. The exact same code works fine for the server. We are both baffled. 
+*Added MathEngine libraries and includes to Spark2
+
+May 30, 2000 Time spent: 2 hours
+*Did some research on MathEngine
+*Did some bug fixin'
+
+May 26, 2000 Time spent: 1:30pm - 5:00pm == 3.50 hours
+*Texturing works (just had to glEnable(GL_TEXTURE_2D) in a few places)
+*The scenery and track are drawn and textured.
+*Drawing splines need to be worked on & tested.
+*To do: load ASE files through the console
+
+May 25, 2000 Time spent: 3:00pm - 6:30pm == 3.50 hours
+*Models are drawn now, but the texturing isn't working for some reason.
+
+May 24, 2000 Time spent: 8:30pm - 10:30pm = 2.0 hours
+*Merged aseconv2 with Spark2. Models load fine (or at least I think they do; cube isn't anymore), but nothing is displayed (except for a "random" triangle or two). I'll fix that tomorrow. Side note: The last time anyone did work on the Spark2 project on the server was April 25, 2000; basically a month ago! What took so long? Writing a new converter took longer than I anticipated. The first rewrite took 3 days. The current one took nearly a month, but it was well worth it.
